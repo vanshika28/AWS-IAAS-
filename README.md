@@ -8,4 +8,4 @@ PROJECT1
 
 Launch EC2 instance. In this Ec2 instance used the key and security group which we have created.Launch one Volume (EBS) and mount that volume into /var/www/html Developer have uploded the code into github Copy the github repo code into /var/www/html Created S3 bucket, and copy/deployed the images from github repo into the s3 bucket and change the permission to public readable.Created a Cloudfront using s3 bucket(which contains images) and use the Cloudfront URL to  update in code in /var/www/html
 
-[Infrastructure as a code AWS](https://github.com/vanshika28/Terraform/tree/master/Task1)
+[1-) Infrastructure as a code AWS](https://github.com/vanshika28/Terraform/tree/master/Task1)
