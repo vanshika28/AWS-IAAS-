@@ -124,7 +124,7 @@ bucket="nonu1"
 acl ="public-read"
 
 provisioner "local-exec" {
-    command = "git clone https://github.com/vanshika28/Web-Image.git  Desktop/Image/I17"
+    command = "git clone https://github.com/vanshika28/Web-Image.git  Desktop/Image/I35"
   }
 
 
@@ -132,9 +132,9 @@ provisioner "local-exec" {
 
 resource "aws_s3_bucket_object" "vg-object" {
    bucket = aws_s3_bucket.nonu1.bucket
- key    = "vanshika1"
+ key    = "vanshika1.png"
 acl="public-read"
-  source = "Desktop/Image/I17/vanshika1.png"
+  source = "Desktop/Image/I35/vanshika1.png"
 
 }
 
@@ -154,7 +154,7 @@ resource "aws_cloudfront_distribution" "s3cloudfront" {
         forward = "none"
       }
     }
-viewer_protocol_policy = "redirect-to-https"
+viewer_protocol_policy = "allow-all"
         min_ttl = 0
         default_ttl = 3600
         max_ttl = 86400
@@ -172,7 +172,7 @@ viewer_protocol_policy = "redirect-to-https"
 
 custom_origin_config {
             http_port = 80
-            https_port = 443
+            https_port = 80
             origin_protocol_policy = "match-viewer"
             origin_ssl_protocols = ["TLSv1", "TLSv1.1", "TLSv1.2"]
         }
@@ -212,8 +212,8 @@ host=aws_instance.web.public_ip
 
 provisioner "remote-exec" {
     inline = [
-      "sudo su << EOF",
-                           "echo \"<img src='http://${self.domain_name}/${aws_s3_bucket_object.vg-object.key} width='500' height='500'>\" >> /var/www/index.html",
+      "sudo -i << EOF",
+                           "echo \"<img src='http://${self.domain_name}/${aws_s3_bucket_object.vg-object.key}' width='500' height='500'>\" >> /var/www/html/index.html",
 "EOF",
     ]
   }
